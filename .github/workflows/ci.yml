@@ -22,14 +22,14 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore PokedexApp.sln
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build PokedexApp.sln --configuration Release --no-restore
 
     - name: Test with coverage
       run: |
-        dotnet test --configuration Release --no-build --verbosity normal \
+        dotnet test PokedexApp.sln --configuration Release --no-build --verbosity normal \
           --collect:"XPlat Code Coverage" \
           --results-directory ./coverage \
           --settings coverlet.runsettings
