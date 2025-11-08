@@ -1,35 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace PokedexApp.BasicInfo.Entities;
 
-public class PokemonSpecies
+public record PokemonSpecies(
+    [property: JsonPropertyName("name")] string Name,
+    [property: JsonPropertyName("is_legendary")] bool IsLegendary,
+    [property: JsonPropertyName("habitat")] Habitat Habitat,
+    [property: JsonPropertyName("flavor_text_entries")] ICollection<FlavorTextEntry> FlavorTextEntries
+)
 {
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-    
-    [JsonPropertyName("is_legendary")]
-    public bool IsLegendary { get; set; }
-    
-    [JsonPropertyName("habitat")]
-    public Habitat Habitat { get; set; }
-    
-    [JsonPropertyName("flavor_text_entries")]
-    public ICollection<FlavorTextEntry> Flavor_Text_Entries { get; set; } = [];
+    public PokemonSpecies() : this(default!, default, default!, default!)
+    {
+    }
 }
 
-public class Habitat
-{
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-    
-    [JsonPropertyName("url")]
-    public string Url { get; set; }
-}
+public record Habitat(
+    [property: JsonPropertyName("name")] string Name,
+    [property: JsonPropertyName("url")] string Url
+);
 
-public class FlavorTextEntry
-{
-    [JsonPropertyName("flavor_text")]
-    public string Flavor_Text { get; set; }
-}
+public record FlavorTextEntry(
+    [property: JsonPropertyName("flavor_text")] string FlavorText
+);
 

@@ -131,13 +131,10 @@ public class GetPokemonByNameQueryHandlerTests
         {
             Name = ValidPokemonName,
             IsLegendary = false,
-            Habitat = new Habitat { Name = "forest", Url = "https://pokeapi.co/api/v2/habitat/2/" },
-            Flavor_Text_Entries =
+            Habitat = new Habitat("forest", "https://pokeapi.co/api/v2/habitat/2/"),
+            FlavorTextEntries =
             [
-                new FlavorTextEntry
-                {
-                    Flavor_Text = "When several of these Pokémon gather, their electricity could build and cause lightning storms."
-                }
+                new FlavorTextEntry("When several of these Pokémon gather, their electricity could build and cause lightning storms.")
             ]
         };
 

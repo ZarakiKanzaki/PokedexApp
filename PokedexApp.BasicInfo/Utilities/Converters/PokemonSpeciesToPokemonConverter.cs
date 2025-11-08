@@ -15,8 +15,8 @@ public sealed class PokemonSpeciesToPokemonConverter : BaseConverterWithValidati
         };
 
     private static string? FormatDescription(PokemonSpecies objectToConvert) 
-        => objectToConvert.Flavor_Text_Entries?
-                        .FirstOrDefault()?.Flavor_Text?.Replace("\n", " ").Replace("\f", " ");
+        => objectToConvert.FlavorTextEntries?
+                        .FirstOrDefault()?.FlavorText?.Replace("\n", " ").Replace("\f", " ");
 
     protected override bool IsObjectInvalid(PokemonSpecies objectToValidate)
         => objectToValidate == null || string.IsNullOrWhiteSpace(objectToValidate.Name);
