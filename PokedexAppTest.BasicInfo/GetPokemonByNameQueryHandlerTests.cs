@@ -1,6 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using PokedexApp.BasicInfo.Dto;
 using PokedexApp.BasicInfo.Entities;
 using PokedexApp.BasicInfo.Queries;
 using PokedexAppTest.BasicInfo.Mocks;

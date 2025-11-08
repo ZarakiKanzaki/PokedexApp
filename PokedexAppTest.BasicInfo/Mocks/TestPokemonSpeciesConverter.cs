@@ -17,7 +17,7 @@ internal sealed class TestPokemonSpeciesConverter : IConverter<PokemonSpecies, P
         {
             Name = objectToConvert?.Name ?? "test",
             Description = "Test Description",
-            Habitat = objectToConvert?.Habitat?.Name,
+            Habitat = objectToConvert?.Habitat?.Name ?? string.Empty,
             IsLegendary = objectToConvert?.IsLegendary ?? false
         };
     }

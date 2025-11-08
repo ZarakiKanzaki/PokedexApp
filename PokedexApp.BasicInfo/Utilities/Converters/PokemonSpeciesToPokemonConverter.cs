@@ -11,7 +11,7 @@ public sealed class PokemonSpeciesToPokemonConverter : BaseConverterWithValidati
             Name = objectToConvert.Name,
             Description = FormatDescription(objectToConvert) ?? string.Empty,
             IsLegendary = objectToConvert.IsLegendary,
-            Habitat = objectToConvert.Habitat?.Name,
+            Habitat = objectToConvert.Habitat?.Name ?? string.Empty,
         };
 
     private static string? FormatDescription(PokemonSpecies objectToConvert) 
