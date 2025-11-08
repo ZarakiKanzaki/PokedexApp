@@ -5,13 +5,14 @@ using Moq;
 using PokedexApp.BasicInfo.Dto;
 using PokedexApp.BasicInfo.Queries;
 using PokedexApp.WebApi.Controllers;
+using PokedexAppTest.WebApi.TestData;
 using Shouldly;
 using System.Net;
 
-namespace PokedexAppTest.WebApi;
+namespace PokedexAppTest.WebApi.Controllers;
 
 [TestClass]
-public class PokedexControllerTests
+public class GetPokemonByNameTests
 {
     private Mock<ILogger<PokedexController>> _loggerMock = null!;
     private Mock<IMediator> _mediatorMock = null!;
@@ -31,7 +32,7 @@ public class PokedexControllerTests
     [TestMethod]
     public async Task GetPokemonByName__ValidName__ReturnsOkWithPokemon()
     {
-        var expectedPokemon = CreateValidPokemon();
+        var expectedPokemon = PokemonTestDataFactory.CreatePikachu();
         SetupMediatorToReturnPokemon(expectedPokemon);
 
         var result = await _controller.GetPokemonByName(ValidPokemonName);
@@ -48,7 +49,7 @@ public class PokedexControllerTests
     [TestMethod]
     public async Task GetPokemonByName__LegendaryPokemon__ReturnsOkWithLegendaryFlag()
     {
-        var legendaryPokemon = CreateLegendaryPokemon();
+        var legendaryPokemon = PokemonTestDataFactory.CreateMewtwo();
         SetupMediatorToReturnPokemon(legendaryPokemon);
 
         var result = await _controller.GetPokemonByName("mewtwo");
@@ -61,7 +62,7 @@ public class PokedexControllerTests
     [TestMethod]
     public async Task GetPokemonByName__UpperCaseName__ReturnsOk()
     {
-        var expectedPokemon = CreateValidPokemon();
+        var expectedPokemon = PokemonTestDataFactory.CreatePikachu();
         SetupMediatorToReturnPokemon(expectedPokemon);
 
         var result = await _controller.GetPokemonByName("PIKACHU");
@@ -74,7 +75,7 @@ public class PokedexControllerTests
     [TestMethod]
     public async Task GetPokemonByName__MixedCaseName__ReturnsOk()
     {
-        var expectedPokemon = CreateValidPokemon();
+        var expectedPokemon = PokemonTestDataFactory.CreatePikachu();
         SetupMediatorToReturnPokemon(expectedPokemon);
 
         var result = await _controller.GetPokemonByName("PiKaChU");
@@ -114,7 +115,7 @@ public class PokedexControllerTests
     [TestMethod]
     public async Task GetPokemonByName__EmptyName__SendsQueryToMediator()
     {
-        var expectedPokemon = CreateValidPokemon();
+        var expectedPokemon = PokemonTestDataFactory.CreatePikachu();
         SetupMediatorToReturnPokemon(expectedPokemon);
 
         var result = await _controller.GetPokemonByName(string.Empty);
@@ -135,7 +136,7 @@ public class PokedexControllerTests
     [TestMethod]
     public async Task GetPokemonByName__ValidName__CreatesCorrectQuery()
     {
-        var expectedPokemon = CreateValidPokemon();
+        var expectedPokemon = PokemonTestDataFactory.CreatePikachu();
         GetPokemonByNameQuery? capturedQuery = null;
 
         _mediatorMock
@@ -153,7 +154,7 @@ public class PokedexControllerTests
     [TestMethod]
     public async Task GetPokemonByName__MultipleRequests__EachCallsMediator()
     {
-        var expectedPokemon = CreateValidPokemon();
+        var expectedPokemon = PokemonTestDataFactory.CreatePikachu();
         SetupMediatorToReturnPokemon(expectedPokemon);
 
         await _controller.GetPokemonByName("pikachu");
@@ -166,13 +167,7 @@ public class PokedexControllerTests
     [TestMethod]
     public async Task GetPokemonByName__PokemonWithNoHabitat__ReturnsOkWithEmptyHabitat()
     {
-        var pokemonWithoutHabitat = new Pokemon
-        {
-            Name = "unknown",
-            Description = "A mysterious Pokemon",
-            Habitat = string.Empty,
-            IsLegendary = false
-        };
+        var pokemonWithoutHabitat = PokemonTestDataFactory.CreatePokemonWithEmptyHabitat();
         SetupMediatorToReturnPokemon(pokemonWithoutHabitat);
 
         var result = await _controller.GetPokemonByName("unknown");
@@ -181,22 +176,6 @@ public class PokedexControllerTests
         var pokemon = okResult.Value.ShouldBeOfType<Pokemon>();
         pokemon.Habitat.ShouldBeEmpty();
     }
-
-    private static Pokemon CreateValidPokemon() => new()
-    {
-        Name = ValidPokemonName,
-        Description = "When several of these Pokémon gather, their electricity could build and cause lightning storms.",
-        Habitat = "forest",
-        IsLegendary = false
-    };
-
-    private static Pokemon CreateLegendaryPokemon() => new()
-    {
-        Name = "mewtwo",
-        Description = "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.",
-        Habitat = "rare",
-        IsLegendary = true
-    };
 
     private void SetupMediatorToReturnPokemon(Pokemon pokemon)
     {

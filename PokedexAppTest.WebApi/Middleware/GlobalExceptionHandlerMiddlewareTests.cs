@@ -6,7 +6,7 @@ using Moq;
 using PokedexApp.WebApi.Middleware;
 using Shouldly;
 
-namespace PokedexAppTest.WebApi;
+namespace PokedexAppTest.WebApi.Middleware;
 
 [TestClass]
 public class GlobalExceptionHandlerMiddlewareTests
