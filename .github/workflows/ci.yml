@@ -34,18 +34,22 @@ jobs:
           --results-directory ./coverage \
           --settings coverlet.runsettings
 
+    - name: List coverage files (debug)
+      run: find ./coverage -name "*.xml" -type f || echo "No XML files found"
+
     - name: Generate coverage report
       run: |
         dotnet tool install -g dotnet-reportgenerator-globaltool
         reportgenerator \
-          -reports:"coverage/**/coverage.cobertura.xml" \
+          -reports:"./coverage/**/*.xml" \
           -targetdir:"coveragereport" \
-          -reporttypes:"Html;Cobertura"
+          -reporttypes:"Html;Cobertura" \
+          -verbosity:Info
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
       with:
-        files: ./coverage/**/coverage.cobertura.xml
+        files: ./coverage/**/*.xml
         directory: ./coverage
         flags: unittests
         name: codecov-umbrella
