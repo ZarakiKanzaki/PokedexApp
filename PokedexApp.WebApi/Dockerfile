@@ -12,19 +12,19 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["PokedexApp.csproj", "."]
-RUN dotnet restore "./PokedexApp.csproj"
+COPY ["PokedexApp.WebApi/PokedexApp.WebApi.csproj", "PokedexApp.WebApi/"]
+RUN dotnet restore "./PokedexApp.WebApi/PokedexApp.WebApi.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "./PokedexApp.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/PokedexApp.WebApi"
+RUN dotnet build "./PokedexApp.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./PokedexApp.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./PokedexApp.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "PokedexApp.dll"]
+ENTRYPOINT ["dotnet", "PokedexApp.WebApi.dll"]
