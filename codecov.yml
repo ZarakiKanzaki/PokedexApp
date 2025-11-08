@@ -1,0 +1,44 @@
+# Codecov configuration
+# https://docs.codecov.io/docs/codecov-yaml
+
+codecov:
+  require_ci_to_pass: true
+
+coverage:
+  precision: 2
+  round: down
+  range: "70...100"
+
+  status:
+    project:
+      default:
+        target: 80%
+        threshold: 1%
+        informational: false
+    patch:
+      default:
+        target: 80%
+        informational: false
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+comment:
+  layout: "reach,diff,flags,tree"
+  behavior: default
+  require_changes: false
+
+ignore:
+  - "**/*.Designer.cs"
+  - "**/Program.cs"
+  - "**/Startup.cs"
+  - "**/*Test*.cs"
+  - "**/*Tests.cs"
+  - "**/TestData/**"
+  - "**/bin/**"
+  - "**/obj/**"
