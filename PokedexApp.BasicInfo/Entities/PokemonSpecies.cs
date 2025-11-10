@@ -20,6 +20,12 @@ public record Habitat(
 );
 
 public record FlavorTextEntry(
-    [property: JsonPropertyName("flavor_text")] string FlavorText
+    [property: JsonPropertyName("flavor_text")] string FlavorText,
+    [property: JsonPropertyName("language")] Language Language
+);
+
+public record Language(
+    [property: JsonPropertyName("name")] string Name,
+    [property: JsonPropertyName("url")] string Url
 );
 

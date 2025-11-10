@@ -6,6 +6,8 @@ namespace PokedexApp.BasicInfo.Utilities.Converters;
 
 public sealed class PokemonSpeciesToPokemonConverter : BaseConverterWithValidation<PokemonSpecies, Pokemon, PokemonSpeciesToPokemonConverter>
 {
+    private const string EnglishLanguageCode = "en";
+
     protected override Pokemon GetConvertedObject(PokemonSpecies objectToConvert)
         => new()
         {
@@ -17,7 +19,8 @@ public sealed class PokemonSpeciesToPokemonConverter : BaseConverterWithValidati
 
     private static string? FormatDescription(PokemonSpecies objectToConvert) 
         => objectToConvert.FlavorTextEntries?
-                        .FirstOrDefault()?.FlavorText?.Replace("\n", " ").Replace("\f", " ");
+                        .FirstOrDefault(entry => entry.Language?.Name == EnglishLanguageCode)
+                        ?.FlavorText?.Replace("\n", " ").Replace("\f", " ");
 
     protected override bool IsObjectInvalid(PokemonSpecies objectToValidate)
         => objectToValidate == null || string.IsNullOrWhiteSpace(objectToValidate.Name);

@@ -133,7 +133,10 @@ public class GetPokemonByNameQueryHandlerTests
             Habitat = new Habitat("forest", "https://pokeapi.co/api/v2/habitat/2/"),
             FlavorTextEntries =
             [
-                new FlavorTextEntry("When several of these Pokémon gather, their electricity could build and cause lightning storms.")
+                new FlavorTextEntry(
+                    "When several of these Pokémon gather, their electricity could build and cause lightning storms.",
+                    new Language("en", "https://pokeapi.co/api/v2/language/9/")
+                )
             ]
         };
 
