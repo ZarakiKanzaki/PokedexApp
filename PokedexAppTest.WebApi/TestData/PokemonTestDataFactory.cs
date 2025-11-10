@@ -1,4 +1,4 @@
-using PokedexApp.BasicInfo.Dto;
+using PokedexApp.Common.Dto;
 
 namespace PokedexAppTest.WebApi.TestData;
 

@@ -1,3 +1,5 @@
+using PokedexApp.BasicInfo;
+using PokedexApp.Translator;
 using PokedexApp.WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,8 +9,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add MediatR - adjust the assembly reference based on your project structure
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+// Register BasicInfo and Translator services with MediatR handlers
+builder.Services.AddBasicInfo();
+builder.Services.AddTranslator();
 
 var app = builder.Build();
 

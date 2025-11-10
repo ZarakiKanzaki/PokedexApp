@@ -1,5 +1,6 @@
-using PokedexApp.BasicInfo.Dto;
 using PokedexApp.BasicInfo.Entities;
+using PokedexApp.Common.Dto;
+using PokedexApp.Common.Utilities;
 
 namespace PokedexApp.BasicInfo.Utilities.Converters;
 

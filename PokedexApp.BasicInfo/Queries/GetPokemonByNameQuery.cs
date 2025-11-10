@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using MediatR;
-using PokedexApp.BasicInfo.Dto;
+using PokedexApp.Common.Dto;
 using PokedexApp.BasicInfo.Entities;
-using PokedexApp.BasicInfo.Utilities;
+using PokedexApp.Common.Utilities;
 
 namespace PokedexApp.BasicInfo.Queries;
 

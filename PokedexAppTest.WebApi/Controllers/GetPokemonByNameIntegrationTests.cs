@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using PokedexApp.BasicInfo.Queries;
-using PokedexApp.BasicInfo.Dto;
+using PokedexApp.Common.Dto;
 using PokedexAppTest.WebApi.TestData;
 using Shouldly;
 using System.Net;

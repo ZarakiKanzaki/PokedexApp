@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using PokedexApp.BasicInfo.Dto;
+using PokedexApp.Common.Dto;
 using PokedexApp.BasicInfo.Queries;
 using PokedexApp.WebApi.Controllers;
 using PokedexAppTest.WebApi.TestData;

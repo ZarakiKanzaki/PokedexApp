@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PokedexApp.BasicInfo.Dto;
+namespace PokedexApp.Common.Dto;
 
 public class Pokemon
 {

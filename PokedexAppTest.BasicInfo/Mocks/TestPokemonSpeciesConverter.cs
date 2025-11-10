@@ -1,6 +1,6 @@
-using PokedexApp.BasicInfo.Dto;
+using PokedexApp.Common.Dto;
 using PokedexApp.BasicInfo.Entities;
-using PokedexApp.BasicInfo.Utilities;
+using PokedexApp.Common.Utilities;
 
 namespace PokedexAppTest.BasicInfo.Mocks;
 

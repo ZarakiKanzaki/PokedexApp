@@ -1,4 +1,4 @@
-﻿namespace PokedexApp.BasicInfo.Utilities;
+﻿namespace PokedexApp.Common.Utilities;
 
 public abstract class BaseConverterWithValidation<Ffrom, Tto, Cconverter> : IConverter<Ffrom, Tto>
 {
